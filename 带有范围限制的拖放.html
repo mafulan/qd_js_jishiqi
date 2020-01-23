@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    div{
+        width: 150px;
+        height: 150px;
+        background-color: red;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+    var oDiv = document.querySelector("div");
+    oDiv.onmousedown = function (){
+        var disX = event.pageX - oDiv.offsetLeft;
+        var disY = event.pageY - oDiv.offsetTop;
+        document.onmousemove = function (){
+            var newL = event.pageX - disX;
+            var newT = event.pageY - disY;
+            newL = Math.max(newL,0);
+            newL = Math.min(document.documentElement.clientWidth-oDiv.offsetWidth,newL);
+            newT = Math.max(newT,0);
+            newT = Math.min(document.documentElement.clientHeight-oDiv.offsetHeight,newT);
+            oDiv.style.left = newL + "px";
+            oDiv.style.top = newT + "px";
+        }
+        document.onmouseup = function (){
+            document.onmouseup = document.onmousemove = null;
+        }
+        return false;
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #div1{
+        width:25px;
+        height:500px;
+        background-color: #ccc;
+        position: absolute;
+        left: 150px;
+        top: 100px;
+
+    }
+    #div2{
+        width:25px;
+        height: 80px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-color: black;
+    }
+    </style>
+</head>
+<body>
+    <div id="div1">
+        <div id="div2">
+
+        </div>
+    </div>
+    <script>
+    var oDiv1 = document.getElementById("div1");
+    var oDiv2 = document.getElementById("div2");
+    oDiv2.onmousedown = function(){
+        var disY = event.pageY - (oDiv1.offsetTop+oDiv2.offsetTop);
+        document.onmousemove = function(){
+            var newT = event.pageY - disY-oDiv1.offsetTop;
+            newT = Math.max(newT,0);
+            newT = Math.min(oDiv1.offsetHeight - oDiv2.offsetHeight,newT);
+            oDiv2.style.top = newT + "px";
+        }
+        document.onmouseup = function(){
+            document.onmouseup = document.onmousemove = null;
+        }
+        return false;
+    }
+
+   
+
+    </script>
+</body>
+</html>

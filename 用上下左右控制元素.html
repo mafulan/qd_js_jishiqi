@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    div{
+        width: 150px;
+        height: 150px;
+        background-color: red;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+    var oDiv = document.querySelector("div");
+    document.onkeydown = function (){
+        switch(event.keyCode){
+            case 37: oDiv.style.left = oDiv.offsetLeft - 5 + "px"; break;
+            case 38: oDiv.style.top = oDiv.offsetTop - 5 + "px"; break;
+            case 39: oDiv.style.left = oDiv.offsetLeft + 5 + "px"; break;
+            case 40: oDiv.style.top = oDiv.offsetTop + 5 + "px"; break;
+        }
+    }
+    </script>
+</body>
+</html>

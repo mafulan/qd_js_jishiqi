@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    document.onkeydown = function (){
+        console.log(event.keyCode);
+        if(event.ctrlKey){
+            console.log("你按下了ctrl键");
+        }else{
+            console.log("你没有按下ctrl键");
+        }
+    }
+    </script>
+</body>
+</html>

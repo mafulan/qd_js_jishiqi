@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    img{
+        /* width: 150px;
+        height: 150px; */
+        background-color: red;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    </style>
+</head>
+<body>
+    <!-- <div></div> -->
+    <img src="0.JPG" alt="">
+    <script>
+    var oDiv = document.querySelector("img");
+    // 鼠标落下事件onmousedown，计算出鼠标与div的相对位置
+    // 鼠标移动事件onmousemove，持续给DIV赋值
+    // 鼠标抬起事件onmouseup，阻止div继续移动
+    oDiv.onmousedown = function (){
+        var disX = event.pageX - oDiv.offsetLeft;
+        var disY = event.pageY - oDiv.offsetTop;
+        document.onmousemove = function (){
+            oDiv.style.left = event.pageX - disX + "px";
+            oDiv.style.top = event.pageY - disY + "px";
+        }
+        document.onmouseup = function (){
+            document.onmouseup = document.onmousemove = null;
+        }
+        return false;
+    }
+    </script>
+</body>
+</html>

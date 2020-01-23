@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #div1{
+        width: 80px;
+        height: 80px;
+        background-color: red;
+        border-radius: 50%;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    #div2{
+        width: 150px;
+        height: 20px;
+        background-color: black;
+        position: absolute;
+        left: 0;
+        top: 500px;
+    }
+    </style>
+</head>
+<body>
+    <div id="div1"></div>
+    <div id="div2"></div>
+    <script>
+    var oDiv1 = document.querySelector("#div1");
+    var oDiv2 = document.querySelector("#div2");
+    var sX = 8;
+    var sY = 5;
+    
+    var timer=setInterval(function (){
+        var newL = oDiv1.offsetLeft + sX;
+        var newT = oDiv1.offsetTop + sY;
+        var r = Math.floor(Math.random()*256);
+        var g = Math.floor(Math.random()*256);
+        var b = Math.floor(Math.random()*256);
+        if(newL<=0){
+            newL = 0;
+            sX = -sX;
+            oDiv1.style.backgroundColor = 'rgb('+r+','+g+','+b+')';
+        }else if(newL>=document.documentElement.clientWidth-oDiv1.offsetWidth){
+            newL = document.documentElement.clientWidth-oDiv1.offsetWidth;
+            sX = -sX;
+            oDiv1.style.backgroundColor = 'rgb('+r+','+g+','+b+')';
+        }
+        if(newT<=0){
+            newT = 0;
+            sY = -sY;
+            oDiv1.style.backgroundColor = 'rgb('+r+','+g+','+b+')';
+        }else if(newT>=document.documentElement.clientHeight-oDiv1.offsetHeight){
+            // newT=document.documentElement.clientHeight-oDiv1.offsetHeight;
+            // sY = -sY;
+            clearInterval(timer);
+            alert("gameover!");
+           
+        }else if( oDiv1.offsetLeft+oDiv1.offsetWidth>oDiv2.offsetLeft&&
+                  oDiv1.offsetLeft<oDiv2.offsetLeft+oDiv2.offsetWidth&&
+                    oDiv1.offsetTop+oDiv1.offsetHeight >oDiv2.offsetTop){
+            newT = oDiv2.offsetTop-oDiv1.offsetHeight;
+            sY = -sY;
+            oDiv1.style.backgroundColor = 'rgb('+r+','+g+','+b+')';
+        }
+         oDiv1.style.left = newL + "px";
+        oDiv1.style.top = newT+ "px";
+    },30)
+
+    oDiv2.onmousedown = function (){
+        var disX = event.pageX - oDiv2.offsetLeft;
+        document.onmousemove = function (){
+            var newL = event.pageX - disX;
+            newL = Math.max(newL,0);
+            newL = Math.min(document.documentElement.clientWidth-oDiv2.offsetWidth,newL);
+            oDiv2.style.left = newL + "px";
+        }
+        document.onmouseup = function (){
+            document.onmouseup = document.onmousemove = null;
+        }
+        return false;
+    }
+
+    </script>
+</body>
+</html>

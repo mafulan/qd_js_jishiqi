@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    div{
+        width: 150px;
+        height: 150px;
+        background-color: red;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+    var oDiv = document.querySelector("div");
+    oDiv.lB = oDiv.rB = oDiv.tB = oDiv.bB = false;
+    setInterval(function (){
+        oDiv.lB && (oDiv.style.left = oDiv.offsetLeft - 5 + "px");
+        oDiv.rB && (oDiv.style.left = oDiv.offsetLeft + 5 + "px");
+        oDiv.tB && (oDiv.style.top = oDiv.offsetTop - 5 + "px");
+        oDiv.bB && (oDiv.style.top = oDiv.offsetTop + 5 + "px");
+    },50);
+    document.onkeydown = function (){
+        switch(event.keyCode){
+            case 37 : oDiv.lB = true; break;
+            case 38 : oDiv.tB = true; break;
+            case 39 : oDiv.rB = true; break;
+            case 40 : oDiv.bB = true; break;
+        }
+    }
+    document.onkeyup = function (){
+        switch(event.keyCode){
+            case 37 : oDiv.lB = false; break;
+            case 38 : oDiv.tB = false; break;
+            case 39 : oDiv.rB = false; break;
+            case 40 : oDiv.bB = false; break;
+        }
+    }
+    </script>
+</body>
+</html>
